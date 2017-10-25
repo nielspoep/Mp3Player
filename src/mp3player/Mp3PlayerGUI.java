@@ -34,7 +34,6 @@ public class Mp3PlayerGUI extends javax.swing.JFrame {
         jButtonMusic = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableMusicLib = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -112,10 +111,6 @@ public class Mp3PlayerGUI extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(410, 10, 590, 520);
-
-        jButton1.setText("jButton1");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(150, 350, 79, 25);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -209,7 +204,6 @@ public class Mp3PlayerGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     public javax.swing.JButton jButtonMusic;
     private javax.swing.JLabel jLabelPause;
     private javax.swing.JLabel jLabelPlay;
