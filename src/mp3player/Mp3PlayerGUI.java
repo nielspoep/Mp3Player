@@ -3,9 +3,26 @@ package mp3player;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import static java.nio.file.Files.list;
+import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
+import static java.rmi.Naming.list;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.util.ArrayList;
+import static java.util.Collections.list;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static javax.management.Query.attr;
+import static javax.management.Query.attr;
+import javax.swing.table.DefaultTableModel;
+import org.farng.mp3.MP3File;
+import org.farng.mp3.id3.ID3v1;
 
 /**
  *
@@ -96,13 +113,25 @@ public class Mp3PlayerGUI extends javax.swing.JFrame {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Name", "Album", "Artist", "Duration"
             }
         ));
         jTableMusicLib.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMusicLibMouseClicked(evt);
+            }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jTableMusicLibMouseReleased(evt);
             }
@@ -146,26 +175,39 @@ public class Mp3PlayerGUI extends javax.swing.JFrame {
     
     int returnVal = chooser.showOpenDialog(null);
     
-    if (returnVal == JFileChooser.APPROVE_OPTION)
+    if (returnVal == JFileChooser.APPROVE_OPTION)   
     {
         MC.Stop();
         File myFile = chooser.getSelectedFile();
         String song = myFile + "";
         
         String name = chooser.getSelectedFile().getName();
+        String album = chooser.getSelectedFile().getName();
         jTextFieldDisplay.setText(name);
         jTableMusicLib.setValueAt(name,0,0);
+        jTableMusicLib.setValueAt(album,0,1);
         
         MC.Play(song);
     }
-    
-    
+    Mp3File mp3file = new Mp3File(chooser);
+    if (mp3file.hasId3v1Tag()) {
+    ID3v1 id3v1Tag = mp3file.getId3v1Tag();
+    System.out.println("Artist: " + id3v1Tag.getArtist());
+    System.out.println("Title: " + id3v1Tag.getTitle());
+    System.out.println("Album: " + id3v1Tag.getAlbum());
+    System.out.println("Year: " + id3v1Tag.getYear());
+    System.out.println("Comment: " + id3v1Tag.getComment());
+}
     }//GEN-LAST:event_jButtonMusicActionPerformed
 
     private void jTableMusicLibMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMusicLibMouseReleased
     jTableMusicLib.setEnabled(false);
     
     }//GEN-LAST:event_jTableMusicLibMouseReleased
+
+    private void jTableMusicLibMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMusicLibMouseClicked
+    
+    }//GEN-LAST:event_jTableMusicLibMouseClicked
 
     /**
      * @param args the command line arguments
