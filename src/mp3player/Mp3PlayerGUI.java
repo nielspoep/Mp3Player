@@ -31,6 +31,8 @@ import org.farng.mp3.id3.ID3v1;
 public class Mp3PlayerGUI extends javax.swing.JFrame {
 
     MainClass MC = new MainClass();
+    int i = 0;
+    int control = 0;
     public Mp3PlayerGUI() {
         initComponents();
     }
@@ -117,11 +119,6 @@ public class Mp3PlayerGUI extends javax.swing.JFrame {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
@@ -174,34 +171,44 @@ public class Mp3PlayerGUI extends javax.swing.JFrame {
     chooser.setAcceptAllFileFilterUsed(false);
     
     int returnVal = chooser.showOpenDialog(null);
-    
     if (returnVal == JFileChooser.APPROVE_OPTION)   
     {
         MC.Stop();
         File myFile = chooser.getSelectedFile();
         String song = myFile + "";
-        
         String name = chooser.getSelectedFile().getName();
-        String album = chooser.getSelectedFile().getName();
-        jTextFieldDisplay.setText(name);
-        jTableMusicLib.setValueAt(name,0,0);
-        jTableMusicLib.setValueAt(album,0,1);
+
         
-        MC.Play(song);
-    }
-    Mp3File mp3file = new Mp3File(chooser);
-    if (mp3file.hasId3v1Tag()) {
-    ID3v1 id3v1Tag = mp3file.getId3v1Tag();
-    System.out.println("Artist: " + id3v1Tag.getArtist());
-    System.out.println("Title: " + id3v1Tag.getTitle());
-    System.out.println("Album: " + id3v1Tag.getAlbum());
-    System.out.println("Year: " + id3v1Tag.getYear());
-    System.out.println("Comment: " + id3v1Tag.getComment());
-}
+        jTextFieldDisplay.setText(name);
+        String [] names = new String [10];
+        names [i] = name;
+        for (int j = 0; j < i+1; j++) {
+            if (name.equals(names[j])&& control > 0){   
+            break; 
+                
+            } else{
+            control++; 
+            jTableMusicLib.setValueAt(names[i], i++,0);
+            MC.Play(song);
+            }
+            
+            
+        }
+        
+        
+        
+        }
+
+    jTableMusicLib.setAutoCreateRowSorter(true);
+
+    
+        
+
     }//GEN-LAST:event_jButtonMusicActionPerformed
 
     private void jTableMusicLibMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMusicLibMouseReleased
     jTableMusicLib.setEnabled(false);
+    jTableMusicLib.setAutoCreateRowSorter(true);
     
     }//GEN-LAST:event_jTableMusicLibMouseReleased
 
