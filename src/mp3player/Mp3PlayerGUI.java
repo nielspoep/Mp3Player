@@ -1,6 +1,11 @@
 
 package mp3player;
 
+import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -20,6 +25,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static javax.management.Query.attr;
 import static javax.management.Query.attr;
+import javax.swing.JButton;
+import javax.swing.JPopupMenu;
+import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import org.farng.mp3.MP3File;
 import org.farng.mp3.id3.ID3v1;
@@ -28,14 +38,25 @@ import org.farng.mp3.id3.ID3v1;
  *
  * @author Niels
  */
+
 public class Mp3PlayerGUI extends javax.swing.JFrame {
 
     MainClass MC = new MainClass();
     int i = 0;
+    int j = 0;
+    int k = 0;
+    int l = 0;
+    int m = 0;
     int control = 0;
     public Mp3PlayerGUI() {
         initComponents();
+        
+       
     }
+   String [] songPlay = new String [9999];
+   
+   
+     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,10 +74,22 @@ public class Mp3PlayerGUI extends javax.swing.JFrame {
         jButtonMusic = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableMusicLib = new javax.swing.JTable();
+        jTextFieldDuration = new javax.swing.JTextField();
+        jTextFieldSongName = new javax.swing.JTextField();
+        jTextFieldAlbum = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableMp3 = new javax.swing.JTable();
+        jTextFieldArtist = new javax.swing.JTextField();
+        jButtonAddSongName = new javax.swing.JButton();
+        jButtonAddAlbum = new javax.swing.JButton();
+        jButtonAddArtist = new javax.swing.JButton();
+        jButtonAddDuration3 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMinimumSize(new java.awt.Dimension(400, 700));
+        setMinimumSize(new java.awt.Dimension(700, 700));
+        setPreferredSize(new java.awt.Dimension(1400, 700));
         getContentPane().setLayout(null);
 
         jLabelStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mp3player/Stop Icon.png"))); // NOI18N
@@ -101,17 +134,109 @@ public class Mp3PlayerGUI extends javax.swing.JFrame {
         getContentPane().add(jTextFieldDisplay);
         jTextFieldDisplay.setBounds(70, 0, 270, 30);
 
-        jButtonMusic.setText("Select Music");
+        jButtonMusic.setText("Select any .mp3");
         jButtonMusic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonMusicActionPerformed(evt);
             }
         });
         getContentPane().add(jButtonMusic);
-        jButtonMusic.setBounds(290, 160, 100, 25);
+        jButtonMusic.setBounds(270, 160, 130, 25);
 
         jTableMusicLib.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -138,17 +263,213 @@ public class Mp3PlayerGUI extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(410, 10, 590, 520);
 
+        jTextFieldDuration.setText("Add duration...");
+        jTextFieldDuration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldDurationActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextFieldDuration);
+        jTextFieldDuration.setBounds(10, 390, 290, 40);
+
+        jTextFieldSongName.setText("Add songname...");
+        jTextFieldSongName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldSongNameActionPerformed(evt);
+            }
+        });
+        jTextFieldSongName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldSongNameKeyReleased(evt);
+            }
+        });
+        getContentPane().add(jTextFieldSongName);
+        jTextFieldSongName.setBounds(10, 210, 290, 40);
+
+        jTextFieldAlbum.setText("Add album...");
+        jTextFieldAlbum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldAlbumActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextFieldAlbum);
+        jTextFieldAlbum.setBounds(10, 270, 290, 40);
+
+        jTableMp3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Mp3"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTableMp3);
+
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(1010, 10, 200, 520);
+
+        jTextFieldArtist.setText("Add artist...");
+        jTextFieldArtist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldArtistActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextFieldArtist);
+        jTextFieldArtist.setBounds(10, 330, 290, 40);
+
+        jButtonAddSongName.setText("Add");
+        jButtonAddSongName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddSongNameActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonAddSongName);
+        jButtonAddSongName.setBounds(310, 210, 90, 40);
+
+        jButtonAddAlbum.setText("Add");
+        jButtonAddAlbum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddAlbumActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonAddAlbum);
+        jButtonAddAlbum.setBounds(310, 270, 90, 40);
+
+        jButtonAddArtist.setText("Add");
+        jButtonAddArtist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddArtistActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonAddArtist);
+        jButtonAddArtist.setBounds(310, 330, 90, 40);
+
+        jButtonAddDuration3.setText("Add");
+        jButtonAddDuration3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddDuration3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonAddDuration3);
+        jButtonAddDuration3.setBounds(310, 390, 90, 40);
+
+        jLabel1.setText("To edit text double click cell in the table...");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(10, 460, 390, 30);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelStopMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelStopMousePressed
-
+    MC.Stop();
     }//GEN-LAST:event_jLabelStopMousePressed
-
-    private void jLabelPlayMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPlayMouseReleased
-
-    MC.Resume();
-    }//GEN-LAST:event_jLabelPlayMouseReleased
 
     private void jLabelStopMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelStopMouseReleased
     MC.Stop();
@@ -170,36 +491,24 @@ public class Mp3PlayerGUI extends javax.swing.JFrame {
     chooser.addChoosableFileFilter(filter);
     chooser.setAcceptAllFileFilterUsed(false);
     
+    
     int returnVal = chooser.showOpenDialog(null);
-    if (returnVal == JFileChooser.APPROVE_OPTION)   
+    if (returnVal == JFileChooser.APPROVE_OPTION)  
+        
+    
     {
         MC.Stop();
         File myFile = chooser.getSelectedFile();
         String song = myFile + "";
         String name = chooser.getSelectedFile().getName();
-
-        
         jTextFieldDisplay.setText(name);
-        String [] names = new String [10];
-        names [i] = name;
-        for (int j = 0; j < i+1; j++) {
-            if (name.equals(names[j])&& control > 0){   
-            break; 
-                
-            } else{
-            control++; 
-            jTableMusicLib.setValueAt(names[i], i++,0);
-            MC.Play(song);
-            }
-            
-            
+        MC.Play(song);
+        jTableMp3.setValueAt(name, i++,0);
+        jTableMp3.setAutoCreateRowSorter(true);
         }
         
-        
-        
-        }
-
-    jTableMusicLib.setAutoCreateRowSorter(true);
+  
+    
 
     
         
@@ -207,14 +516,73 @@ public class Mp3PlayerGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonMusicActionPerformed
 
     private void jTableMusicLibMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMusicLibMouseReleased
-    jTableMusicLib.setEnabled(false);
+    jTableMusicLib.setEnabled(true);
     jTableMusicLib.setAutoCreateRowSorter(true);
+   
+    
+
+    
     
     }//GEN-LAST:event_jTableMusicLibMouseReleased
 
+    
     private void jTableMusicLibMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMusicLibMouseClicked
     
     }//GEN-LAST:event_jTableMusicLibMouseClicked
+
+    private void jTextFieldDurationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDurationActionPerformed
+    
+    }//GEN-LAST:event_jTextFieldDurationActionPerformed
+
+    private void jTextFieldSongNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSongNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldSongNameActionPerformed
+
+    private void jTextFieldAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAlbumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldAlbumActionPerformed
+
+    private void jTextFieldSongNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldSongNameKeyReleased
+
+    }//GEN-LAST:event_jTextFieldSongNameKeyReleased
+
+    private void jTextFieldArtistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldArtistActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldArtistActionPerformed
+
+    private void jButtonAddSongNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddSongNameActionPerformed
+    String songName;
+        jTextFieldSongName.getText();
+        songName = jTextFieldSongName.getText();
+    jTableMusicLib.setValueAt(songName, j++, 0);
+    
+    }//GEN-LAST:event_jButtonAddSongNameActionPerformed
+
+    private void jButtonAddAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddAlbumActionPerformed
+    String songAlbum;    
+        jTextFieldAlbum.getText();
+        songAlbum = jTextFieldAlbum.getText();
+    jTableMusicLib.setValueAt(songAlbum, k++, 1);
+    }//GEN-LAST:event_jButtonAddAlbumActionPerformed
+
+    private void jButtonAddArtistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddArtistActionPerformed
+    String songArtist;    
+        jTextFieldArtist.getText();
+        songArtist = jTextFieldArtist.getText();
+    jTableMusicLib.setValueAt(songArtist, l++, 2);
+    }//GEN-LAST:event_jButtonAddArtistActionPerformed
+
+    private void jButtonAddDuration3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddDuration3ActionPerformed
+    String songDuration;    
+        jTextFieldDuration.getText();
+        songDuration = jTextFieldDuration.getText();
+    jTableMusicLib.setValueAt(songDuration, m++, 3);
+    }//GEN-LAST:event_jButtonAddDuration3ActionPerformed
+
+    private void jLabelPlayMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPlayMouseReleased
+
+        MC.Resume();
+    }//GEN-LAST:event_jLabelPlayMouseReleased
 
     /**
      * @param args the command line arguments
@@ -253,12 +621,27 @@ public class Mp3PlayerGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAddAlbum;
+    private javax.swing.JButton jButtonAddArtist;
+    private javax.swing.JButton jButtonAddDuration3;
+    private javax.swing.JButton jButtonAddSongName;
     public javax.swing.JButton jButtonMusic;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelPause;
     private javax.swing.JLabel jLabelPlay;
     private javax.swing.JLabel jLabelStop;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableMp3;
     public javax.swing.JTable jTableMusicLib;
+    private javax.swing.JTextField jTextFieldAlbum;
+    private javax.swing.JTextField jTextFieldArtist;
     private javax.swing.JTextField jTextFieldDisplay;
+    private javax.swing.JTextField jTextFieldDuration;
+    public javax.swing.JTextField jTextFieldSongName;
     // End of variables declaration//GEN-END:variables
-}
+
+        public void actionPerformed(ActionEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    }
